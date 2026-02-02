@@ -21,10 +21,11 @@
   --dark: #203331;         
   --gold: #D4AF37;         
   --bg: #fdfbf7;           
-  --glass: rgba(255, 255, 255, 0.85);
+  --glass: rgba(255, 255, 255, 0.9);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--dark); overflow-x: hidden; }
 body.noscroll { overflow: hidden; }
 
@@ -36,30 +37,16 @@ h1, h2, h3 { color: var(--primary); }
 
 /* === WELCOME SPLASH SCREEN === */
 .welcome-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--bg);
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
+    z-index: 10000; display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;
     transition: opacity 1.5s ease-out, visibility 1.5s;
 }
-
 .welcome-overlay.fade-out { opacity: 0; visibility: hidden; }
 .welcome-content { animation: slideUpFade 2s ease-out forwards; }
 .welcome-icon { font-size: 40px; color: var(--gold); margin-bottom: 20px; animation: beat 1.5s infinite; }
-
-@keyframes slideUpFade {
-    0% { opacity: 0; transform: translateY(50px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-@keyframes beat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
+@keyframes slideUpFade { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
 /* UTILS */
 .container { max-width: 500px; margin: 0 auto; background: #fff; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.05); min-height: 100vh; padding-bottom: 50px; }
@@ -82,15 +69,14 @@ h1, h2, h3 { color: var(--primary); }
 .cover-content h1 { font-size: 45px; color: var(--gold); line-height: 1.1; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 .date-display { border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); padding: 5px 20px; display: inline-block; margin-bottom: 20px; letter-spacing: 2px;}
 
-/* === MARQUEE (GALERI DEPAN) === */
-/* Dikembalikan ke settingan awal agar full dan rapi */
+/* MARQUEE */
 .marquee-container { width: 100%; overflow: hidden; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
 .marquee-row { display: flex; gap: 8px; width: max-content; animation: scrollLeft 30s linear infinite; }
 .marquee-frame { width: 110px; height: 110px; border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #fff; }
-.marquee-frame img { width: 100%; height: 100%; object-fit: cover; } /* COVER: Agar foto depan tetap full bingkai */
+.marquee-frame img { width: 100%; height: 100%; object-fit: contain; } 
 @keyframes scrollLeft { to { transform: translateX(-50%); } }
 
-/* MAIN CONTENT & ANIMATION */
+/* MAIN CONTENT */
 #main-content { display: none; }
 .section { padding: 50px 25px; text-align: center; }
 .section:nth-child(odd) { background: #fff; }
@@ -99,22 +85,26 @@ h1, h2, h3 { color: var(--primary); }
 .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* === FOTO MEMPELAI (DIPERBAIKI) === */
+/* FOTO MEMPELAI (PORTRAIT) */
 .couple-card { margin: 20px 0; }
 .couple-img { 
-  width: 160px;          /* Lebar */
-  height: 220px;         /* Tinggi (Portrait) agar pas foto muat semua */
-  border-radius: 20px;   /* Sudut melengkung sedikit (bukan bulat penuh) */
-  object-fit: cover; 
-  border: 3px solid var(--gold);
-  padding: 5px;
-  margin: 0 auto 15px auto;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  background: white;
+  width: 160px; height: 220px; border-radius: 20px; object-fit: cover; 
+  border: 3px solid var(--gold); padding: 5px; margin: 0 auto 15px auto;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: white;
 }
 .couple-name { font-size: 28px; color: var(--primary); margin-bottom: 5px; }
 .parents { font-size: 13px; color: #666; }
 .separator { font-size: 35px; color: var(--gold); margin: 15px 0; }
+
+/* NARASI VISUAL (Kisah Cinta) */
+.story-block { margin-bottom: 40px; }
+.story-text { font-size: 15px; line-height: 1.8; font-style: italic; color: #555; margin: 20px 0; padding: 0 15px; }
+.story-text::before { content: '“'; font-size: 30px; color: var(--gold); line-height: 0; position: relative; top: 10px; margin-right: 5px; }
+.story-img {
+    width: 90%; max-width: 350px; height: 250px; object-fit: cover;
+    border-radius: 15px; border: 3px solid var(--gold);
+    margin: 0 auto; display: block; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
 
 /* EVENT & GIFT */
 .event-card { background: #fff; border-radius: 15px; padding: 30px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-top: 20px; border-top: 4px solid var(--gold); }
@@ -133,7 +123,7 @@ h1, h2, h3 { color: var(--primary); }
 @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
 /* FOOTER */
-.footer { background: var(--bg); color: var(--dark); padding: 60px 25px; border-top: 5px solid var(--primary); position: relative; }
+.footer { background: var(--bg); color: var(--dark); padding: 60px 25px; border-top: 5px solid var(--primary); position: relative;}
 .footer::before { content: '❤'; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 15px; font-size: 24px; color: var(--gold); }
 .footer-thankyou { font-family: 'Great Vibes', cursive; font-size: 45px; color: var(--gold); margin-bottom: 20px; line-height: 1; }
 
@@ -162,7 +152,6 @@ h1, h2, h3 { color: var(--primary); }
     <span class="date-display">29 . 03 . 2026</span>
     
     <div class="marquee-container">
-        
         <div class="marquee-row">
              <div class="marquee-frame"><img src="https://i.ibb.co.com/xSDHhxYB/IMG-20260203-WA0015.jpg" alt="Baru 1"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/6cZBBdRc/IMG-20260202-WA0050.jpg"></div>
@@ -170,7 +159,6 @@ h1, h2, h3 { color: var(--primary); }
              <div class="marquee-frame"><img src="https://i.ibb.co.com/9QYDgz6/IMG-20260202-WA0049.jpg"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/23HDxcN8/IMG-20260203-WA0001.jpg"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/1YyTnTc6/IMG-20260203-WA0002.jpg"></div>
-             
              <div class="marquee-frame"><img src="https://i.ibb.co.com/xSDHhxYB/IMG-20260203-WA0015.jpg" alt="Baru 1"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/6cZBBdRc/IMG-20260202-WA0050.jpg"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/tPHpwjvv/IMG-20260203-WA0014.jpg" alt="Baru 2"></div>
@@ -178,7 +166,6 @@ h1, h2, h3 { color: var(--primary); }
              <div class="marquee-frame"><img src="https://i.ibb.co.com/23HDxcN8/IMG-20260203-WA0001.jpg"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/1YyTnTc6/IMG-20260203-WA0002.jpg"></div>
         </div>
-
         <div class="marquee-row">
              <div class="marquee-frame"><img src="https://i.ibb.co.com/1YyTnTc6/IMG-20260203-WA0002.jpg"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/tPHpwjvv/IMG-20260203-WA0014.jpg" alt="Baru 2"></div>
@@ -186,7 +173,6 @@ h1, h2, h3 { color: var(--primary); }
              <div class="marquee-frame"><img src="https://i.ibb.co.com/xSDHhxYB/IMG-20260203-WA0015.jpg" alt="Baru 1"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/9QYDgz6/IMG-20260202-WA0049.jpg"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/6cZBBdRc/IMG-20260202-WA0050.jpg"></div>
-             
              <div class="marquee-frame"><img src="https://i.ibb.co.com/1YyTnTc6/IMG-20260203-WA0002.jpg"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/tPHpwjvv/IMG-20260203-WA0014.jpg" alt="Baru 2"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/23HDxcN8/IMG-20260203-WA0001.jpg"></div>
@@ -194,7 +180,6 @@ h1, h2, h3 { color: var(--primary); }
              <div class="marquee-frame"><img src="https://i.ibb.co.com/9QYDgz6/IMG-20260202-WA0049.jpg"></div>
              <div class="marquee-frame"><img src="https://i.ibb.co.com/6cZBBdRc/IMG-20260202-WA0050.jpg"></div>
         </div>
-
     </div>
     
     <div style="margin-bottom: 15px;">
@@ -209,13 +194,13 @@ h1, h2, h3 { color: var(--primary); }
 
 <div class="container" id="main-content">
 
-  <div class="section reveal">
+  <div class="section reveal" id="home">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Basmala.svg/1200px-Basmala.svg.png" class="top-ornament">
     <h2 class="font-serif" style="margin-top:10px;">Assalamualaikum Wr. Wb.</h2>
     <p style="font-size:14px; line-height:1.8; margin-top: 15px;">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan acara pernikahan putra-putri kami:</p>
   </div>
 
-  <div class="section reveal">
+  <div class="section reveal" id="couple">
     <div class="couple-card">
       <img src="https://i.ibb.co.com/rf33pPSp/IMG-20260203-WA0018.jpg" class="couple-img">
       <h1 class="font-script couple-name">Nurmaya Sari</h1>
@@ -235,7 +220,26 @@ h1, h2, h3 { color: var(--primary); }
     <p class="font-serif text-gold"><b>(QS. Ar-Rum: 21)</b></p>
   </div>
 
-  <div class="section reveal">
+  <div class="section reveal" id="story">
+     <h2 class="font-serif" style="margin-bottom: 30px;">Kisah Kasih Kami</h2>
+     
+     <div class="story-block reveal">
+         <p class="story-text">Setiap cerita cinta itu indah, tapi cerita kamilah yang menjadi favoritku. Berawal dari tatapan sederhana, takdir membawa hati kita untuk saling menemukan dalam sebuah skenario yang tak terduga.</p>
+         <img src="https://i.ibb.co.com/xSDHhxYB/IMG-20260203-WA0015.jpg" class="story-img" alt="Momen 1">
+     </div>
+
+     <div class="story-block reveal">
+         <p class="story-text">Cinta bukan tentang menemukan seseorang yang sempurna, melainkan melihat ketidaksempurnaan seseorang dengan cara yang sempurna. Bersamamu, aku belajar bahwa rumah bukanlah sebuah tempat, melainkan seseorang.</p>
+         <img src="https://i.ibb.co.com/tPHpwjvv/IMG-20260203-WA0014.jpg" class="story-img" alt="Momen 2">
+     </div>
+
+     <div class="story-block reveal">
+         <p class="story-text">Dan hari ini, di bawah saksi langit dan bumi, kita siap melangkah menuju babak baru. Bukan akhir dari sebuah pencarian, melainkan awal dari petualangan abadi. Bismillah, untuk selamanya.</p>
+         <img src="https://i.ibb.co.com/23HDxcN8/IMG-20260203-WA0001.jpg" class="story-img" alt="Momen 3">
+     </div>
+  </div>
+
+  <div class="section reveal" id="event">
     <h2 class="font-serif">Rangkaian Acara</h2>
     <p style="margin-top:10px; font-size: 14px;">Insya Allah acara akan dilaksanakan pada:</p>
     <div class="event-card">
@@ -258,7 +262,7 @@ h1, h2, h3 { color: var(--primary); }
     </div>
   </div>
 
-  <div class="section reveal">
+  <div class="section reveal" id="gift">
     <h2 class="font-serif">Wedding Gift</h2>
     <p style="font-size:14px; margin: 15px 0 25px 0;">Doa restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
     <div class="bank-card">
@@ -273,7 +277,9 @@ h1, h2, h3 { color: var(--primary); }
   
   <div class="section reveal">
     <h2 class="font-serif">RSVP</h2>
-    <p style="font-size:14px; margin: 15px 0 25px 0;">Mohon konfirmasi kehadiran Anda:</p>
+    <p style="font-size:14px; margin: 15px 0 25px 0; line-height: 1.6;">
+        Tiada yang lebih membahagiakan bagi kami selain kehadiran dan doa restu Bapak/Ibu/Saudara/i. Mohon konfirmasi kehadiran Anda melalui tombol di bawah ini:
+    </p>
     <a href="https://wa.me/6281371330553?text=Halo+Kak+Maya,+Insya+Allah+saya+akan+hadir." target="_blank" class="btn btn-gold">
         <i class="fab fa-whatsapp"></i> Konfirmasi Kehadiran
     </a>
