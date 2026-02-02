@@ -34,12 +34,12 @@ h1, h2, h3 { color: var(--primary); }
 .font-serif { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 .text-gold { color: var(--gold); }
 
-/* === WELCOME SPLASH SCREEN (ANIMASI PEMBUKA) === */
+/* === WELCOME SPLASH SCREEN === */
 .welcome-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--bg);
-    z-index: 10000; /* Paling atas */
+    z-index: 10000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,32 +48,18 @@ h1, h2, h3 { color: var(--primary); }
     transition: opacity 1.5s ease-out, visibility 1.5s;
 }
 
-.welcome-overlay.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.welcome-content {
-    animation: slideUpFade 2s ease-out forwards;
-}
-
-.welcome-icon {
-    font-size: 40px;
-    color: var(--gold);
-    margin-bottom: 20px;
-    animation: beat 1.5s infinite;
-}
+.welcome-overlay.fade-out { opacity: 0; visibility: hidden; }
+.welcome-content { animation: slideUpFade 2s ease-out forwards; }
+.welcome-icon { font-size: 40px; color: var(--gold); margin-bottom: 20px; animation: beat 1.5s infinite; }
 
 @keyframes slideUpFade {
     0% { opacity: 0; transform: translateY(50px); }
     100% { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes beat {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
 }
-/* ============================================== */
 
 /* UTILS */
 .container { max-width: 500px; margin: 0 auto; background: #fff; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.05); min-height: 100vh; padding-bottom: 50px; }
@@ -96,19 +82,13 @@ h1, h2, h3 { color: var(--primary); }
 .cover-content h1 { font-size: 45px; color: var(--gold); line-height: 1.1; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
 .date-display { border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); padding: 5px 20px; display: inline-block; margin-bottom: 20px; letter-spacing: 2px;}
 
-/* === DOUBLE MARQUEE (2x1 Sejajar) === */
-.marquee-container {
-    width: 100%; overflow: hidden; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; 
-}
-.marquee-row {
-    display: flex; gap: 8px; width: max-content; animation: scrollLeft 30s linear infinite; 
-}
-.marquee-frame {
-    width: 110px; height: 110px; border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #fff;
-}
-.marquee-frame img { width: 100%; height: 100%; object-fit: cover; }
+/* === MARQUEE (GALERI DEPAN) === */
+/* Dikembalikan ke settingan awal agar full dan rapi */
+.marquee-container { width: 100%; overflow: hidden; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
+.marquee-row { display: flex; gap: 8px; width: max-content; animation: scrollLeft 30s linear infinite; }
+.marquee-frame { width: 110px; height: 110px; border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; flex-shrink: 0; background: #fff; }
+.marquee-frame img { width: 100%; height: 100%; object-fit: cover; } /* COVER: Agar foto depan tetap full bingkai */
 @keyframes scrollLeft { to { transform: translateX(-50%); } }
-/* ==================================== */
 
 /* MAIN CONTENT & ANIMATION */
 #main-content { display: none; }
@@ -119,9 +99,19 @@ h1, h2, h3 { color: var(--primary); }
 .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* MEMPELAI */
+/* === FOTO MEMPELAI (DIPERBAIKI) === */
 .couple-card { margin: 20px 0; }
-.couple-img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); padding: 4px; margin: 0 auto 15px auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.couple-img { 
+  width: 160px;          /* Lebar */
+  height: 220px;         /* Tinggi (Portrait) agar pas foto muat semua */
+  border-radius: 20px;   /* Sudut melengkung sedikit (bukan bulat penuh) */
+  object-fit: cover; 
+  border: 3px solid var(--gold);
+  padding: 5px;
+  margin: 0 auto 15px auto;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  background: white;
+}
 .couple-name { font-size: 28px; color: var(--primary); margin-bottom: 5px; }
 .parents { font-size: 13px; color: #666; }
 .separator { font-size: 35px; color: var(--gold); margin: 15px 0; }
@@ -233,7 +223,7 @@ h1, h2, h3 { color: var(--primary); }
     </div>
     <div class="separator font-script">&</div>
     <div class="couple-card">
-      <img src="https://i.ibb.co.com/TMzPhTCB/IMG-20260203-WA0019.jpg" class="couple-img">
+      <img src="https://i.ibb.co.com/HfpR7JYy/IMG-20260203-WA0022.jpg" class="couple-img">
       <h1 class="font-script couple-name">Rahmat Hidayat</h1>
       <p class="parents">Putra dari Bpk. Nurmansyah & Ibu Sri rezeki</p>
     </div>
@@ -300,15 +290,12 @@ h1, h2, h3 { color: var(--primary); }
 </div>
 
 <script>
-  // SCRIPT WELCOME SCREEN (HILANG OTOMATIS)
   window.addEventListener("load", () => {
     setTimeout(() => {
         document.getElementById("welcomeScreen").classList.add("fade-out");
-    }, 2500); // Waktu tampil splash screen (2500ms = 2.5 detik)
+    }, 2500); 
   });
 
-
-  // LOGIKA BUKA UNDANGAN
   function bukaUndangan(){
     const cover = document.getElementById("cover");
     const content = document.getElementById("main-content");
@@ -327,7 +314,6 @@ h1, h2, h3 { color: var(--primary); }
     }, 600);
   }
 
-  // UTILS LAINNYA
   function toggleMusic(){
     const music = document.getElementById("musik");
     const ctrl = document.getElementById("music-control");
