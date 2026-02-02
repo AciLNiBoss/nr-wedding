@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Wedding of maya & Rahmat</title>
+<title>The Wedding of Maya & Rahmat</title>
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Wedding of Maya & Rahmat">
@@ -96,7 +96,7 @@ h1, h2, h3 { color: var(--primary); }
     display: flex;
     gap: 15px;
     animation: scrollLeft 20s linear infinite;
-    width: max-content; /* Penting agar konten berjejer */
+    width: max-content;
 }
 .marquee-frame {
     width: 120px;
@@ -114,7 +114,7 @@ h1, h2, h3 { color: var(--primary); }
     object-fit: cover;
 }
 @keyframes scrollLeft {
-    to { transform: translateX(-50%); } /* Geser setengah dari total lebar (karena duplikat) */
+    to { transform: translateX(-50%); }
 }
 
 
@@ -201,7 +201,7 @@ h1, h2, h3 { color: var(--primary); }
 .spin { animation: spin 4s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-/* FOOTER (Redesigned for clarity) */
+/* FOOTER */
 .footer { 
     background: var(--bg); 
     color: var(--dark); 
@@ -235,7 +235,7 @@ h1, h2, h3 { color: var(--primary); }
     color: var(--primary);
 }
 
-/* FLOWER ANIMATION - Diperhalus */
+/* FLOWER ANIMATION */
 .flower { position: fixed; top: -50px; font-size: 16px; color: rgba(212, 175, 55, 0.4); animation: fall linear infinite; z-index: 9998; pointer-events: none; }
 @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
@@ -340,7 +340,7 @@ h1, h2, h3 { color: var(--primary); }
         <i class="fas fa-map-marker-alt"></i>
         <p style="margin-bottom: 15px;"><b>Lokasi Acara:</b><br>Kediaman Mempelai Wanita<br>Jalan Klambir Lima Gang Kapas 3, Tj. Gusta, Kec. Sunggal, Kabupaten Deli Serdang, Sumatera Utara</p>
         
-        <a href="https://www.google.com/maps?q=3.643567,98.605335" target="_blank" class="btn">
+        <a href="https://www.google.com/maps/search/?api=1&query=Jalan+Klambir+Lima+Gang+Kapas+3,+Tj.+Gusta,+Kec.+Sunggal,+Kabupaten+Deli+Serdang,+Sumatera+Utara" target="_blank" class="btn">
             <i class="fas fa-location-arrow"></i> Lihat Google Maps
         </a>
       </div>
@@ -362,6 +362,17 @@ h1, h2, h3 { color: var(--primary); }
       <p class="rek-label" style="margin-top:15px;">ATAS NAMA</p>
       <p class="rek-name">NURMAYA SARI</p>
     </div>
+  </div>
+  
+  <div class="section reveal">
+    <h2 class="font-serif">RSVP</h2>
+    <p style="font-size:14px; margin: 15px 0 25px 0; line-height: 1.6;">
+        Mohon konfirmasi kehadiran Anda agar kami dapat mempersiapkan jamuan dengan lebih baik.
+    </p>
+    
+    <a href="https://wa.me/6281371330553?text=Halo%20Kak%20Maya%2C%20Insya%20Allah%20saya%20akan%20hadir%20di%20acara%20pernikahannya.%20Terima%20kasih." target="_blank" class="btn btn-gold">
+        <i class="fab fa-whatsapp"></i> Konfirmasi Kehadiran
+    </a>
   </div>
 
   <div class="section footer reveal">
@@ -430,11 +441,10 @@ h1, h2, h3 { color: var(--primary); }
         alert("Nomor Rekening Berhasil Disalin: " + norek);
     }).catch(err => {
         console.error('Gagal menyalin: ', err);
-        // Fallback manual jika navigator.clipboard gagal (jarang terjadi di browser modern)
+        // Fallback manual jika navigator.clipboard gagal
         fallbackCopyText(norek);
     });
   }
-  // Fallback untuk browser lama (opsional)
   function fallbackCopyText(text) {
     var textArea = document.createElement("textarea");
     textArea.value = text;
@@ -452,7 +462,7 @@ h1, h2, h3 { color: var(--primary); }
     for(var i=0; i < reveals.length; i++){
       var windowheight = window.innerHeight;
       var revealtop = reveals[i].getBoundingClientRect().top;
-      var revealpoint = 100; // Jarak sebelum elemen muncul
+      var revealpoint = 100; 
 
       if(revealtop < windowheight - revealpoint){
         reveals[i].classList.add('active');
@@ -460,14 +470,14 @@ h1, h2, h3 { color: var(--primary); }
     }
   }
 
-  // EFEK BUNGA JATUH (Lebih halus dan sedikit)
+  // EFEK BUNGA JATUH
   document.addEventListener("DOMContentLoaded", () => {
     for(let i=0; i<12; i++){
         let f = document.createElement("div");
         f.className = "flower";
-        f.innerHTML = "⚜"; // Menggunakan simbol yang lebih elegan dari pada emoji hati
+        f.innerHTML = "⚜"; 
         f.style.left = Math.random() * 100 + "vw";
-        f.style.animationDuration = 8 + Math.random() * 7 + "s"; // Lebih lambat
+        f.style.animationDuration = 8 + Math.random() * 7 + "s";
         f.style.opacity = 0.3 + Math.random() * 0.4;
         f.style.fontSize = 14 + Math.random() * 10 + "px";
         document.body.appendChild(f);
